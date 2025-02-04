@@ -5,30 +5,45 @@
 #include "Task.h"
 #include "algorithm"
 
+void NewArray(int* array, int middle)
+{
+	//int* newArray = new int[middle];
+	for (int i = 0; i < middle; i++)
+		array[i] = array[i];
+	//return array;
+}
+
+void NewArray2(int* array, int middle, int size)
+{
+	//int* newArray = new int[middle];
+	for (int i = size-1, j = 0; i > middle; i--, j++)
+		array[j] = array[i];
+	//return array;
+}
+
 int RecursionBinarySearch(int* array, int size, int target)
 {
 	if (array == nullptr || size < 1) return -1;
+	//int index = 0;
 	int right = size - 1;
 	int middle = right / 2;
 	if (target > array[middle])
 	{
-		NewArray(array, middle);
+		NewArray2(array, middle,size);
 		size /= 2;
 	}
 	else if (target <= array[middle])
-		size / 2;
-	if (size != 1)
+	{
+		NewArray(array, middle);
+		size /= 2;
+	}
+	if (size >= 1)
+	{
+
 		RecursionBinarySearch(array, size, target);
+	}
 	if (array[right] == target) return right;
 	else return -1;
-}
-
-int* NewArray(int* array, int middle)
-{
-	int* newArray = new int[middle];
-	for (int i = 0; i < middle; i++)
-		newArray[i] = array[i];
-	return newArray;
 }
 
 /*
